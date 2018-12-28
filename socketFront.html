@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>socketFront</title>
+        <script src="http://localhost:8080/socket.io/socket.io.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <button>Send</button>
+        <script>
+            const APP = {};
+
+            APP.elements = {};
+            APP.events = {};
+            APP.values = {};
+
+            APP.values.sock = io.connect("ws://localhost:8080");
+
+            APP.elements.btnSend = document.querySelector("button");
+
+            // APP.events.btnSendClick = function(){
+            //     console.log(12);
+            //     APP.values.sock.emit("a",12,5);
+                
+            // }
+            
+            // APP.values.sock.on("name",function(name){
+            //     console.log(`接收到了服务器发来的${name}`);
+            // });
+
+            // APP.elements.btnSend.addEventListener('click',APP.events.btnSendClick);
+
+        </script>
+    </body>
+</html>
