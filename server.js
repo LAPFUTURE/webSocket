@@ -1,18 +1,15 @@
 const http = require("http");
-const fs = require("fs");
-let server = http.createServer((req,res)=>{
-    fs.readFile(`www${req.url}`,(err,data)=>{
-        if(err){
-            res.writeHeader(404);
-            res.write("not found");
-            res.end();
-        }else{
-            res.write(data);
-            // console.log(data.toString());
-            res.end();
-        }
-    })
+const io = require("socket.io");
+
+const server = http.createServer((req,res)=>{
 });
 
-
 server.listen(8080);
+
+const webSocketServer = io.listen(server);
+
+webSocketServer.on("connection",(socket)=>{
+    socket.on("a",(n1,n2)=>{
+        console.log(`${n1},${n2}`);
+    });
+});
