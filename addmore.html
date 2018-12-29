@@ -1,0 +1,28 @@
+<html>
+    <head></head>
+    <body>
+            <button id="test">Test</button><br>
+            <button id="addmore">addmore</button>
+            <script>
+                const APP = {};
+                APP.elements = {};
+                APP.events = {};
+                APP.values = {};
+
+                APP.values.a = 0;
+
+                APP.elements.btnTest = document.querySelector("#test");
+
+                APP.events.btnTestClick = ()=>{
+                    document.querySelector("#addmore").addEventListener('click',function lalala(){
+                        alert(APP.values.a);
+                        document.querySelector("#addmore").removeEventListener('click',lalala);
+                    });
+                    APP.values.a++;
+                }
+                
+                APP.elements.btnTest.addEventListener('click',APP.events.btnTestClick);
+
+            </script>
+    </body>
+</html>

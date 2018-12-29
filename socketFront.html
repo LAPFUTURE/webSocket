@@ -4,7 +4,9 @@
         <script src="http://localhost:8080/socket.io/socket.io.js" charset="utf-8"></script>
     </head>
     <body>
-        <button>Send</button>
+        <input name = "name"/><br>
+        <input name = "password"/><br>
+        <button>Send</button><br>
         <script>
             const APP = {};
 
@@ -13,18 +15,20 @@
             APP.values = {};
 
             APP.values.sock = io.connect("ws://localhost:8080");
+            APP.velues.sock.on('reg_ret',(code,msg)=>{
+                code ? alert(`注册失败,${msg}`) : alert(`注册成功,${msg}`);
+            });
 
             APP.elements.btnSend = document.querySelector("button");
+            APP.elements.inputname = document.querySelector("input[name='name']");
+            APP.elements.inputpassword = document.querySelector("input[name='password']");
 
-            APP.events.btnSendClick = function(){
-                console.log(12);
-                APP.values.sock.emit("a",12,5);
-                
+            APP.events.btnSendClick = ()=>{
+                APP.values.sock.emit("reg",APP.elements.inputname.value,APP.elements.inputpassword.value);
             }
-            
-            APP.values.sock.on("name",function(name){
-                console.log(`接收到了服务器发来的${name}`);
-            });
+            APP.events.inputnameClick = ()=>{
+                APP.values.sock.emit();
+            }
 
             APP.elements.btnSend.addEventListener('click',APP.events.btnSendClick);
 
