@@ -42,6 +42,5 @@ websocketServer.on('connection',function(socket){
             });
         }
     });
-    setInterval(()=>{socket.emit("name",Math.random()+"lapXK");},2000);
     
 });
