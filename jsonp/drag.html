@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#drogbox1{
+    display: inline-block;
+    width:200px;
+    height:200px;
+    border:1px silver solid;
+    line-height: 200px;
+    text-align: center;
+}
+#drogbox2{
+    display: inline-block;
+    width:200px;
+    height:200px;
+    border:1px silver solid;
+    line-height: 200px;
+    text-align: center;
+}
+</style>
+<script>
+    DomDOMContentLoaded = ()=>{
+        const APP = {};
+
+        APP.elements = {};
+        APP.events = {};
+        APP.values = {};
+
+        APP.elements.drogBox1 = document.querySelector("#drogbox1");
+        APP.elements.drogBox2 = document.querySelector("#drogbox2");
+        APP.elements.thing = document.querySelector("#thing");
+
+        APP.events.thingOndragstart = (ev)=>{
+            ev.dataTransfer.setData("Text",ev.target.id);
+        }
+        APP.events.drogboxOndrop = (ev)=>{
+            ev.preventDefault();
+            var data=ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+        APP.events.allowDrop = (ev)=>{
+            ev.preventDefault();
+        }
+
+        APP.elements.thing.addEventListener('dragstart',APP.events.thingOndragstart);
+        APP.elements.drogBox1.addEventListener('drop',APP.events.drogboxOndrop);
+        APP.elements.drogBox1.addEventListener('dragover',APP.events.allowDrop);
+        APP.elements.drogBox2.addEventListener('drop',APP.events.drogboxOndrop);
+        APP.elements.drogBox2.addEventListener('dragover',APP.events.allowDrop);
+
+    }
+    document.addEventListener("DOMContentLoaded",DomDOMContentLoaded);
+</script>
+</head>
+<body>
+    <span draggable="true" id="thing">Thing to Drig</span>
+    <br/>
+    <div id="drogbox1">
+        <Strong>Drogbox1</Strong>
+    </div>
+    <div id="drogbox2">
+            <Strong>Drogbox2</Strong>
+    </div>
+</body>
+</html>

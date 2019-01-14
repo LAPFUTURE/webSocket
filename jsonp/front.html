@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>front</title>
+    </head>
+    <body>
+        <h1>123</h1>
+        <input type="file" />
+        <button>submit</button>
+        <button id='play'>play/stop</button>
+        <button id="worker">Worker</button>
+        <video src="file:\\\F:\Picture\xiaoqiao.mp4" poster="file:\\\F:\Picture\girls.jpg" controls>
+            不支持video
+        </video>
+        <script>
+            function log(...args){
+                console.log(...args);
+            };
+            
+            const APP = {};
+
+            APP.elements = {};
+            APP.events = {};
+
+            APP.elements.file1 = document.querySelector("input");
+            APP.elements.btn1 = document.querySelector("button");
+            APP.elements.play = document.querySelector("#play");
+            APP.elements.video1 = document.querySelector("video");
+            APP.elements.btnWorker = document.querySelector("#worker"); 
+
+            APP.elements.btn1.onclick = ()=>{
+                let formData = new FormData();
+                formData.set("name","lap");
+                formData.set("file1",APP.elements.file1);
+                formData.append("name","xk");
+                formData.set("age",20);
+
+                let xhr = new XMLHttpRequest();
+                xhr.upload.onprogress = function(ev){
+                    log(ev.loaded,ev.total);
+                }
+                xhr.open('post','http://localhost:8080',true);
+                xhr.send(formData);
+                xhr.onreadystatechange = ()=>{
+                    if(xhr.readyState == 4){
+                        if(xhr.status == 200 && xhr.status < 300 || xhr.status == 304){
+                            // log(JSON.parse(xhr.responseText));
+                        }
+                    }
+                };
+            }
+
+            APP.elements.play.onclick = ()=>{
+                // log(Math.abs(APP.elements.video1.currentTime));
+                this.playbackRate = 3;
+                if(Math.abs(APP.elements.video1.currentTime) > 0){
+                    APP.elements.video1.pause();
+                }else{
+                    APP.elements.video1.play();
+                }
+                
+            }
+
+            APP.elements.btnWorker.onclick = ()=>{
+                let node = APP.elements.btn1.cloneNode(true);
+                let worker = new Worker('worker.js');
+                worker.postMessage({ number:12,obj:"node" });
+                worker.onmessage = (ev)=>{
+                    console.log(ev);
+                };
+            }
+
+        </script>
+    </body>
+</html>
