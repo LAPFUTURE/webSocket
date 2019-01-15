@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script>
+        let log = (...args)=>{console.log(...args);}
+        // let array = ["apple","banana","origan","peral"];
+        //     log(array.includes("banana"));
+        //     log(array.indexOf("banana"));
+        // log(new Set([1,2,3,4,1,2,3,4,5]));
+        // log(new Set("abcabcbabcfhdfjh"));
+
+        // let array1 = [1,2,4];
+        // let array2 = [1,2,5,6];
+        // log(new Set([...array1,...array2]));
+        // // log(new Set([...array2].filter(x=>{return array2.has(x);})));
+        // let resultMap = new Map()
+        // .set(-1,{name:"lap"})
+        // .set(0,{name:"gfw"})
+        // .set(1,{name:"xk"});
+        // log(resultMap.get(0).name,"_________");
+
+        // let map = new Map([["lap",[20,"boy","music"]],["gfw",[21,"boy","music"]],["xk",[22,"boy","music"]]]);
+        // for(let i of map.keys()){
+        //     log(i);
+        // }
+        // for(let i of map.values()){
+        //     log(i);
+        // }
+        // log(map.keys());
+        // log(map.values());
+
+        let persons = 
+        [   
+            { name:"lap", age:20 },
+            { name:"gfw", age:21 },
+            { name:"xk",  age:22 },
+        ]; 
+
+        //log(persons.filter(persons=>persons.age>=21).map(person=>({person:person,friends:["lap"]})));
+        log(persons.filter(person=>person.name=="lap").map(person=>({person:person,likes:"music"})));
+        log(persons);
+
+        let numArray = [1,2,3,4];
+        log(numArray.reduce((num1,num2,index)=>{console.log(num1,num2,index); return num1+num2;}));
+
+        log(numArray);
+        
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
